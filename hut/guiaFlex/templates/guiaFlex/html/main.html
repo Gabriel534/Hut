@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrachas Industriais - Documentos de Peças</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'guiaFlex/css/estilo.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'guiaFlex/css/estilo2.css' %}">
+    <script src="{% static 'guiaFlex/js/script.js' %}" defer></script>
+</head>
+<body class="bg-gray-100 min-h-screen" style="overflow: auto;">
+    <!-- Header -->
+    <header class="bg-blue-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-industry text-3xl mr-3"></i>
+                    <h1 class="text-2xl md:text-3xl font-bold"> {{ linha }} </h1>
+                </div>
+                <nav>
+                    <button onclick="openQualityDashboard()" class="bg-white text-blue-800 px-4 py-2 rounded-lg font-medium hover:bg-blue-100 transition">
+                        <i class="fas fa-chart-line mr-2"></i>Dashboard Completo
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Documentos e Processos de Fabricação</h2>
+        <!-- Quality Dashboard Summary -->
+        <div class="mb-10 bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="bg-blue-800 text-white px-6 py-4">
+                <h3 class="text-xl font-bold flex items-center">
+                    <i class="fas fa-chart-pie mr-3"></i> Resumo de Qualidade
+                </h3>
+            </div>
+            <div class="p-6">
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="quality-card bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-blue-800">Total Produzido</p>
+                                <h4 class="text-2xl font-bold text-gray-800">12,450</h4>
+                            </div>
+                            <i class="fas fa-boxes text-blue-300 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="quality-card bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-green-800">Aprovadas</p>
+                                <h4 class="text-2xl font-bold text-gray-800">11,680</h4>
+                            </div>
+                            <i class="fas fa-check-circle text-green-300 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="quality-card bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-red-800">Rejeitadas</p>
+                                <h4 class="text-2xl font-bold text-gray-800">770</h4>
+                            </div>
+                            <i class="fas fa-times-circle text-red-300 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="quality-card bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-purple-800">Taxa de Aprovação</p>
+                                <h4 class="text-2xl font-bold text-gray-800">93.8%</h4>
+                            </div>
+                            <i class="fas fa-percentage text-purple-300 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Quality Chart -->
+                <!-- Recent Inspections -->
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="mb-10 max-w-2xl mx-auto">
+            <div class="relative">
+                <input type="text" placeholder="Buscar peça..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button class="absolute right-3 top-3 text-gray-500 hover:text-blue-600">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Product 1 -->
+            <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="openModal('hose-standard')">
+                <div class="p-5 bg-blue-600 text-white">
+                    <img src="./protótipo_files/image.jpg" alt="Descrição da imagem">
+                    <h3 class="text-xl font-bold">Mangueira Standard</h3>
+                    <p class="text-sm opacity-80 mt-1">Diâmetro: 2"</p>
+                </div>
+                <div class="p-5 bg-gray-50">
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span><i class="fas fa-file-pdf mr-1"></i> Documento</span>
+                        <span><i class="fas fa-video mr-1"></i> Processo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="openModal('hose-high-pressure')">
+                <div class="p-5 bg-red-600 text-white">
+                    <img src="./protótipo_files/image.jpg" alt="Descrição da imagem">
+                    <i class="fas fa-hose text-4xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Mangueira HP</h3>
+                    <p class="text-sm opacity-80 mt-1">Alta Pressão</p>
+                </div>
+                <div class="p-5 bg-gray-50">
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span><i class="fas fa-file-pdf mr-1"></i> Documento</span>
+                        <span><i class="fas fa-video mr-1"></i> Processo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="openModal('hose-chemical')">
+                <div class="p-5 bg-green-600 text-white">
+                    <img src="./protótipo_files/image.jpg" alt="Descrição da imagem">
+                    <i class="fas fa-hose text-4xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Mangueira Química</h3>
+                    <p class="text-sm opacity-80 mt-1">Resistente a ácidos</p>
+                </div>
+                <div class="p-5 bg-gray-50">
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span><i class="fas fa-file-pdf mr-1"></i> Documento</span>
+                        <span><i class="fas fa-video mr-1"></i> Processo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="openModal('hose-food')">
+                <img src="./protótipo_files/image.jpg" alt="Descrição da imagem">
+                <div class="p-5 bg-yellow-600 text-white">
+                    <h3 class="text-xl font-bold">Mangueira Alimentícia</h3>
+                    <p class="text-sm opacity-80 mt-1">Grau alimentício</p>
+                </div>
+                <div class="p-5 bg-gray-50">
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span><i class="fas fa-file-pdf mr-1"></i> Documento</span>
+                        <span><i class="fas fa-video mr-1"></i> Processo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 5 -->
+            <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="openModal('hose-insulated')">
+                <div class="p-5 bg-purple-600 text-white">
+                    <i class="fas fa-hose text-4xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Mangueira Isolada</h3>
+                    <p class="text-sm opacity-80 mt-1">Termicamente isolada</p>
+                </div>
+                <div class="p-5 bg-gray-50">
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span><i class="fas fa-file-pdf mr-1"></i> Documento</span>
+                        <span><i class="fas fa-video mr-1"></i> Processo</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 6 -->
+            <div class="product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" onclick="openModal('hose-flexible')">
+                <div class="p-5 bg-orange-600 text-white">
+                    <i class="fas fa-hose text-4xl mb-3"></i>
+                    <h3 class="text-xl font-bold">Mangueira Flexível</h3>
+                    <p class="text-sm opacity-80 mt-1">Alta flexibilidade</p>
+                </div>
+                <div class="p-5 bg-gray-50">
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span><i class="fas fa-file-pdf mr-1"></i> Documento</span>
+                        <span><i class="fas fa-video mr-1"></i> Processo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="productModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-white flex justify-between items-center p-6 border-b">
+                <h3 id="modalTitle" class="text-2xl font-bold text-gray-800">Mangueira Química</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6">
+                <!-- Tabs -->
+                <div class="flex border-b mb-6">
+                    <button onclick="openTab('document-tab')" class="tab-btn px-4 py-2 font-medium border-b-2 border-blue-500 text-blue-600">
+                        <i class="fas fa-file-pdf mr-2"></i> Documentação
+                    </button>
+                    <button onclick="openTab('process-tab')" class="tab-btn px-4 py-2 font-medium hover:text-gray-800 ml-1 text-gray-500">
+                        <i class="fas fa-video mr-2"></i> Processo de Fabricação
+                    </button>
+                    <button onclick="openTab('quality-tab')" class="tab-btn px-4 py-2 font-medium hover:text-gray-800 ml-1 text-gray-500">
+                        <i class="fas fa-chart-pie mr-2"></i> Qualidade
+                    </button>
+                </div>
+
+                <!-- Document Tab -->
+                <div id="document-tab" class="tab-content active">
+                    <div class="flex justify-between mb-4">
+                        <div>
+                            <h4 class="text-lg font-semibold">Documento Técnico</h4>
+                            <p class="text-gray-600">Dados técnicos e especificações da peça</p>
+                        </div>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-download mr-2"></i> Baixar PDF
+                        </button>
+                    </div>
+
+                    <div class="border rounded-lg p-4 mb-6">
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex-1 min-w-[250px]">
+                                <h5 class="font-semibold mb-2">Especificações</h5>
+                                <ul class="space-y-2">
+                                    <li class="flex justify-between"><span class="text-gray-600">Diâmetro:</span> <span>2 polegadas</span></li>
+                                    <li class="flex justify-between"><span class="text-gray-600">Comprimento:</span> <span>50 metros</span></li>
+                                    <li class="flex justify-between"><span class="text-gray-600">Pressão Máxima:</span> <span>150 psi</span></li>
+                                    <li class="flex justify-between"><span class="text-gray-600">Temperatura:</span> <span>-20°C a 80°C</span></li>
+                                </ul>
+                            </div>
+                            <div class="flex-1 min-w-[250px]">
+                                <h5 class="font-semibold mb-2">Material</h5>
+                                <ul class="space-y-2">
+                                    <li class="flex justify-between"><span class="text-gray-600">Boracha:</span> <span>EPDM</span></li>
+                                    <li class="flex justify-between"><span class="text-gray-600">Revestimento:</span> <span>Poliester</span></li>
+                                    <li class="flex justify-between"><span class="text-gray-600">Espessura:</span> <span>3.5 mm</span></li>
+                                    <li class="flex justify-between"><span class="text-gray-600">Cor:</span> <span>Preto</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="font-semibold mb-2">Aplicações</h5>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Sistemas de irrigação</li>
+                                <li>Indústria automotiva</li>
+                                <li>Transferência de líquidos</li>
+                                <li>Uso geral industrial</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold mb-2">Armazenamento</h5>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Armazenar enrolado em tambores</li>
+                                <li>Evitar exposição direta ao sol</li>
+                                <li>Manter em temperatura ambiente</li>
+                                <li>Evitar contato com óleos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process Tab -->
+                <div id="process-tab" class="tab-content">
+                    <h4 class="text-lg font-semibold mb-4">Vídeos do Processo de Fabricação</h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <div class="video-container mb-2 rounded-lg overflow-hidden shadow">
+                                <iframe src="./protótipo_files/dQw4w9WgXcQ.html" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                            </div>
+                            <p class="text-center font-medium">Preparação da borracha</p>
+                        </div>
+                        <div>
+                            <div class="video-container mb-2 rounded-lg overflow-hidden shadow">
+                                <iframe src="./protótipo_files/dQw4w9WgXcQ(1).html" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                            </div>
+                            <p class="text-center font-medium">Extrusão da mangueira</p>
+                        </div>
+                        <div>
+                            <div class="video-container mb-2 rounded-lg overflow-hidden shadow">
+                                <iframe src="./protótipo_files/dQw4w9WgXcQ(2).html" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                            </div>
+                            <p class="text-center font-medium">Vulcanização</p>
+                        </div>
+                        <div>
+                            <div class="video-container mb-2 rounded-lg overflow-hidden shadow">
+                                <iframe src="./protótipo_files/dQw4w9WgXcQ(3).html" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                            </div>
+                            <p class="text-center font-medium">Testes de qualidade</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h5 class="font-semibold mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-blue-500 mr-2"></i> Fluxograma do Processo
+                        </h5>
+                        <div class="flex flex-wrap justify-center gap-4 mt-4">
+                            <div class="process-step bg-white p-3 rounded-lg shadow-sm flex flex-col items-center text-center w-24">
+                                <div class="bg-blue-100 text-blue-600 rounded-full p-2 mb-2">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                                <span class="text-sm">Preparação<br>Matéria-Prima</span>
+                            </div>
+                            <div class="process-step-arrow flex items-center">
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="process-step bg-white p-3 rounded-lg shadow-sm flex flex-col items-center text-center w-24">
+                                <div class="bg-blue-100 text-blue-600 rounded-full p-2 mb-2">
+                                    <i class="fas fa-industry"></i>
+                                </div>
+                                <span class="text-sm">Extrusão</span>
+                            </div>
+                            <div class="process-step-arrow flex items-center">
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="process-step bg-white p-3 rounded-lg shadow-sm flex flex-col items-center text-center w-24">
+                                <div class="bg-blue-100 text-blue-600 rounded-full p-2 mb-2">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <span class="text-sm">Vulcanização</span>
+                            </div>
+                            <div class="process-step-arrow flex items-center">
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="process-step bg-white p-3 rounded-lg shadow-sm flex flex-col items-center text-center w-24">
+                                <div class="bg-blue-100 text-blue-600 rounded-full p-2 mb-2">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <span class="text-sm">Controle<br>Qualidade</span>
+                            </div>
+                            <div class="process-step-arrow flex items-center">
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="process-step bg-white p-3 rounded-lg shadow-sm flex flex-col items-center text-center w-24">
+                                <div class="bg-blue-100 text-blue-600 rounded-full p-2 mb-2">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <span class="text-sm">Embalagem</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quality Tab -->
+                <div id="quality-tab" class="tab-content">
+                    <h4 class="text-lg font-semibold mb-4">Análise de Qualidade</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h5 class="font-semibold mb-3 flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i> Taxa de Aprovação
+                            </h5>
+                            <div class="chart-container">
+                                <canvas id="approvalRateChart" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 372px;" width="372"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <h5 class="font-semibold mb-3 flex items-center">
+                                <i class="fas fa-times-circle text-red-500 mr-2"></i> Motivos de Rejeição
+                            </h5>
+                            <div class="chart-container">
+                                <canvas id="rejectionReasonsChart" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 372px;" width="372"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg shadow mb-6">
+                        <h5 class="font-semibold mb-3 flex items-center">
+                            <i class="fas fa-chart-line text-blue-500 mr-2"></i> Tendência Mensal de Qualidade
+                        </h5>
+                        <div class="chart-container">
+                            <canvas id="monthlyTrendChart" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 801px;" width="801"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h5 class="font-semibold mb-2">Últimas Inspeções</h5>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="py-2 px-4 text-left">Data</th>
+                                        <th class="py-2 px-4 text-left">Lote</th>
+                                        <th class="py-2 px-4 text-left">Quantidade</th>
+                                        <th class="py-2 px-4 text-left">Aprovadas</th>
+                                        <th class="py-2 px-4 text-left">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">15/06/2023</td>
+                                        <td class="py-2 px-4">L-230615</td>
+                                        <td class="py-2 px-4">1,200</td>
+                                        <td class="py-2 px-4">1,150</td>
+                                        <td class="py-2 px-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">95.8%</span></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">10/06/2023</td>
+                                        <td class="py-2 px-4">L-230610</td>
+                                        <td class="py-2 px-4">980</td>
+                                        <td class="py-2 px-4">920</td>
+                                        <td class="py-2 px-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">93.9%</span></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-2 px-4">05/06/2023</td>
+                                        <td class="py-2 px-4">L-230605</td>
+                                        <td class="py-2 px-4">1,500</td>
+                                        <td class="py-2 px-4">1,380</td>
+                                        <td class="py-2 px-4"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">92.0%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4">01/06/2023</td>
+                                        <td class="py-2 px-4">L-230601</td>
+                                        <td class="py-2 px-4">1,100</td>
+                                        <td class="py-2 px-4">990</td>
+                                        <td class="py-2 px-4"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">90.0%</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quality Dashboard Modal -->
+    <div id="qualityDashboard" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-xl w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-white flex justify-between items-center p-6 border-b">
+                <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+                    <i class="fas fa-chart-line text-blue-500 mr-3"></i> Dashboard de Qualidade
+                </h3>
+                <button onclick="closeQualityDashboard()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6">
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-blue-800">Total Produzido</p>
+                                <h4 class="text-2xl font-bold text-gray-800">12,450</h4>
+                            </div>
+                            <i class="fas fa-boxes text-blue-300 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-green-800">Aprovadas</p>
+                                <h4 class="text-2xl font-bold text-gray-800">11,680</h4>
+                            </div>
+                            <i class="fas fa-check-circle text-green-300 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-red-800">Rejeitadas</p>
+                                <h4 class="text-2xl font-bold text-gray-800">770</h4>
+                            </div>
+                            <i class="fas fa-times-circle text-red-300 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-purple-800">Taxa de Aprovação</p>
+                                <h4 class="text-2xl font-bold text-gray-800">93.8%</h4>
+                            </div>
+                            <i class="fas fa-percentage text-purple-300 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Charts -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h5 class="font-semibold mb-3">Taxa de Aprovação por Produto</h5>
+                        <div class="chart-container">
+                            <canvas id="productApprovalChart" width="500" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 500px;"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h5 class="font-semibold mb-3">Principais Causas de Rejeição</h5>
+                        <div class="chart-container">
+                            <canvas id="mainRejectionChart" width="500" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 500px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trend Chart -->
+                <div class="bg-white p-4 rounded-lg shadow mb-8">
+                    <h5 class="font-semibold mb-3">Evolução da Qualidade (Últimos 6 Meses)</h5>
+                    <div class="chart-container">
+                        <canvas id="qualityTrendChart" width="1057" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 1057px;"></canvas>
+                    </div>
+                </div>
+
+                <!-- Rejection Details -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h5 class="font-semibold mb-3">Detalhes das Rejeições</h5>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="py-2 px-4 text-left">Produto</th>
+                                    <th class="py-2 px-4 text-left">Total Produzido</th>
+                                    <th class="py-2 px-4 text-left">Aprovadas</th>
+                                    <th class="py-2 px-4 text-left">Rejeitadas</th>
+                                    <th class="py-2 px-4 text-left">Taxa Aprovação</th>
+                                    <th class="py-2 px-4 text-left">Principal Causa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="py-2 px-4">Mangueira Standard</td>
+                                    <td class="py-2 px-4">3,200</td>
+                                    <td class="py-2 px-4">3,050</td>
+                                    <td class="py-2 px-4">150</td>
+                                    <td class="py-2 px-4">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 95.3%"></div>
+                                        </div>
+                                        <span class="text-sm">95.3%</span>
+                                    </td>
+                                    <td class="py-2 px-4">Espessura irregular</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-4">Mangueira HP</td>
+                                    <td class="py-2 px-4">2,800</td>
+                                    <td class="py-2 px-4">2,620</td>
+                                    <td class="py-2 px-4">180</td>
+                                    <td class="py-2 px-4">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 93.6%"></div>
+                                        </div>
+                                        <span class="text-sm">93.6%</span>
+                                    </td>
+                                    <td class="py-2 px-4">Falha pressão</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2 px-4">Mangueira Química</td>
+                                    <td class="py-2 px-4">2,150</td>
+                                    <td class="py-2 px-4">1,980</td>
+                                    <td class="py-2 px-4">170</td>
+                                    <td class="py-2 px-4">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 92.1%"></div>
+                                        </div>
+                                        <span class="text-sm">92.1%</span>
+                                    </td>
+                                    <td class="py-2 px-4">Resistência química</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 px-4">Mangueira Alimentícia</td>
+                                    <td class="py-2 px-4">1,950</td>
+                                    <td class="py-2 px-4">1,830</td>
+                                    <td class="py-2 px-4">120</td>
+                                    <td class="py-2 px-4">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 93.8%"></div>
+                                        </div>
+                                        <span class="text-sm">93.8%</span>
+                                    </td>
+                                    <td class="py-2 px-4">Contaminação</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
