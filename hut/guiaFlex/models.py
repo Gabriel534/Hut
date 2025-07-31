@@ -22,6 +22,7 @@ class Peca(models.Model):
     descricao = models.CharField(max_length=255)
     processo = models.ForeignKey(Processo, on_delete=models.CASCADE)
     linha = models.ForeignKey(Linha, on_delete=models.CASCADE)
+    imagem = models.ImageField(upload_to='pecas/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.nome} - {self.descricao}"

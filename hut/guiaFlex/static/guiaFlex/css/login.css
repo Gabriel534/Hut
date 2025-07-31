@@ -1,0 +1,29 @@
+body {
+      background-color: #F3F6FA; /* fundo azul claro/cinza */
+    }
+
+    .header-custom {
+      background-color: #ffffff;
+      color: #1E3A8A; /* azul escuro */
+    }
+
+    .btn-custom {
+      background-color: #2563EB; /* azul médio */
+    }
+
+    .btn-custom:hover {
+      background-color: #1E40AF; /* azul mais escuro */
+    }
+
+    .highlight-box {
+      background-color: #E5EAF2; /* azul/cinza claro */
+    }
+
+    .field-label {
+      color: #1E3A8A; /* azul escuro */
+      font-weight: 500;
+    }
+
+    .form-border {
+      border-color: #CBD5E1; /* cinza/azul claro */
+    }
